@@ -45,4 +45,5 @@ I developed **WebDev-Compiler** as a complete **full-stack web application**, ha
 ## Contributions
 Contributions are welcome! Feel free to open issues, submit pull requests, or suggest improvements.
 
-📌 **Developed by:** [Harshad Deshmukh](http://harshaadeshmukh.github.io/Portfolio/)
+📌 **Developed by:** [Harshad Deshmukh](https://github.com/harshaadeshmukh){:target="_blank"}
+
