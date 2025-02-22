@@ -5,7 +5,7 @@
 ## What I Have Built
 I developed **WebDev-Compiler** as a complete **full-stack web application**, handling:
 
-- **Frontend Development** using **React.js** for a responsive and dynamic UI.
+- **Frontend Development** using **React.js & TypeScript** for a responsive and dynamic UI.
 - **State Management** using **Redux** to efficiently handle application state.
 - **Backend Development** with **Node.js & Express.js** for secure and efficient JavaScript execution.
 - **Database Management** using **MongoDB Compass**, allowing users to store code snippets and retrieve execution history.
@@ -18,7 +18,7 @@ I developed **WebDev-Compiler** as a complete **full-stack web application**, ha
 - 🖥️ **Live JavaScript Editor** – Write and edit JavaScript in an interactive, user-friendly interface.
 - ⚡ **Real-Time Output Preview** – Instantly see the changes in the output as you type.
 - 🔍 **Syntax Highlighting** – Enhanced readability and easier debugging with color-coded syntax.
-- 🚀 **React-Powered Frontend** – Ensures smooth performance and an optimized user experience.
+- 🚀 **React & TypeScript Powered Frontend** – Ensures smooth performance and an optimized user experience.
 - 🛠️ **Redux for State Management** – Efficiently handles application-wide state.
 - 🛠️ **Node.js & Express.js Backend** – Handles JavaScript execution securely and efficiently.
 - 📦 **MongoDB Compass Integration** – Allows users to save and manage code snippets.
@@ -27,10 +27,11 @@ I developed **WebDev-Compiler** as a complete **full-stack web application**, ha
 - 📤 **Vercel Deployment** – Ensures fast, scalable, and globally available hosting.
 
 ## Technology Stack
-- **Frontend:** React.js, Redux
+- **Frontend:** React.js, TypeScript, Redux
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB (via MongoDB Compass)
 - **API Testing:** Insomnia
+
 
 ## Future Enhancements
 - **User Authentication** – Allow users to log in and manage saved projects.
@@ -45,5 +46,4 @@ I developed **WebDev-Compiler** as a complete **full-stack web application**, ha
 ## Contributions
 Contributions are welcome! Feel free to open issues, submit pull requests, or suggest improvements.
 
-📌 **Developed by:** [Harshad Deshmukh](https://github.com/harshaadeshmukh){:target="_blank"}
-
+📌 **Developed by:** <a href="http://harshaadeshmukh.github.io/Portfolio/" target="_blank">Harshad Deshmukh</a>
