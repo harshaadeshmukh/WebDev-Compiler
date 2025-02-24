@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
 import { Code } from "../models/Code";
 
-export const saveCode = async (req: Request, res: Response) => {
+import {fullCodeType} from "../types/compilerTypes";
+export const saveCode = async (req: Request, res: Response):Promise<void> => {
 
-    const { fullCode } = req.body;
+    const fullCode:fullCodeType  = req.body;
+    if(!fullCode.html && !fullCode.css && !fullCode.javascript){
+        res.status(400).send({message:"Empty code cannot be saved!!"});  
+        return;
+    }
+  //  console.log(fullCode);
     try {
         const newCode = await Code.create({
             fullCode: fullCode
@@ -15,22 +21,6 @@ export const saveCode = async (req: Request, res: Response) => {
     }
 };
 
-
-// export const loadCode = async (req: Request, res: Response) => {
-//     const { urlId } = req.body
-
-//     try {
-//         const exisitingCode = await Code.findById(urlId);
-//         if (!exisitingCode) {
-//             return res.status(404).send({ message: "Code not found!!" })
-
-//         }
-//         res.status(201).send({ fullCode: exisitingCode.fullCode });
-
-//     } catch (error) {
-//         res.status(500).json({ message: "Error loading code", error });
-//     }
-// }
 
 export const loadCode = async (req: Request, res: Response): Promise<void> => {
     try {

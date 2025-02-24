@@ -3,6 +3,8 @@ import cors from "cors";
 import { config } from "dotenv";
 import { dbConnect } from "./lib/dbConnect";
 import { compilerRouter } from "./routes/compilerRouter";
+//import UserAuthRouter from "./routes/userRouter";
+import userRouter from "./routes/userRouter";
 
 config(); // Load environment variables
 
@@ -14,6 +16,7 @@ app.use(cors({ credentials: true, origin: process.env.CLIENT_URL || "http://loca
 
 // Routes
 app.use("/compiler", compilerRouter);
+app.use("/user", userRouter);
 
 // Database connection
 dbConnect().catch((err) => {

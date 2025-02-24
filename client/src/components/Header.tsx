@@ -14,6 +14,21 @@ export default function Header() {
             Compiler
             </Button></Link>
         </li>
+
+        <li>
+          <Link to="/login">
+          <Button variant="blue">
+            Login
+            </Button></Link>
+        </li>
+
+        {/* <li>
+          <Link to="/signup">
+          <Button variant="blue">
+            Signup
+            </Button></Link>
+            </li> */}
+
       </ul>
     </nav>
   );
