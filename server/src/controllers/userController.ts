@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User";
-
+import { AuthRequest } from "../middleware/verifyToken";
 
 // const User = require("../models/User");
 // const bcrypt = require("bcrypt");
-//const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 
 export const signup = async (req: Request, res: Response): Promise<void> => {
@@ -86,7 +86,12 @@ export const login = async (req: Request, res: Response): Promise<void> => {
             sameSite: "lax",
         });
 
-        res.status(200).send({ username: existingUser.username, picture: existingUser.picture, email: existingUser.email,savedCodes:existingUser.savedCodes });
+        res.status(200).send({ 
+            username: existingUser.username, 
+            picture: existingUser.picture, 
+            email: existingUser.email,
+            savedCodes:existingUser.savedCodes 
+        });
         return;
     } catch (error) {
         res.status(500).send({ message: "Error log in!", error: error });
@@ -104,3 +109,30 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
         return;
     }
 };
+
+
+export const userDetails = async (req: AuthRequest, res: Response):Promise<void> => {
+    const userId = req._id;
+
+    try{
+     console.log(userId); 
+     const user  = await User.findById(userId);
+     if(!user){
+         res.status(404).send({ message: "User not found!" });
+         return;
+      }
+        res.status(200).send({ 
+            username: user.username, 
+            picture: user.picture, 
+            email: user.email,
+            savedCodes:user.savedCodes 
+        });
+
+    // res.status(200).send({ userId });
+     return;
+    }
+    catch(error){
+      res.status(500).send({ message: "Cannot fetch user details!!" });
+      return;
+    }
+  }

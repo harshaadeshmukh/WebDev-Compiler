@@ -8,3 +8,10 @@ interface userInfoType
         email: string; 
         savedCodes: Array<string>; 
     }
+
+interface loginCredentialsType
+{
+    userId: string;
+    password: string;
+
+}

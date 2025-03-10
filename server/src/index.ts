@@ -5,6 +5,7 @@ import { dbConnect } from "./lib/dbConnect";
 import { compilerRouter } from "./routes/compilerRouter";
 //import UserAuthRouter from "./routes/userRouter";
 import userRouter from "./routes/userRouter";
+import cookieParser from "cookie-parser";
 
 config(); // Load environment variables
 
@@ -12,7 +13,8 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ credentials: true, origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
 // Routes
 app.use("/compiler", compilerRouter);

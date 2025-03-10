@@ -22,16 +22,28 @@ export const api = createApi({
                 body: body,
             }),
         }),
-        login: builder.mutation<userInfoType, { userId: string, password: string }>({
+        login: builder.mutation<userInfoType, loginCredentialsType>({
             query: (body) => ({
                 url: '/user/login',
                 method: 'POST',
                 body: body,
             }),
         }),
+
+
+        logout: builder.mutation<void, void>({
+            query: () => ({
+                url: '/user/logout',
+                method: 'POST',
+            }),
+        }),
     }),
 });
 
-export const { useSaveCodeMutation, useLoadCodeMutation,useLoginMutation } = api;
+export const { 
+    useSaveCodeMutation,
+    useLoadCodeMutation,
+    useLoginMutation,
+    useLogoutMutation } = api;
 
 //export const { useSaveCodeMutation } = api;

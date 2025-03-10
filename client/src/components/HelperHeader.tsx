@@ -13,7 +13,6 @@ import {
   updateCurrentLanguage,
 } from "@/redux/slices/compilerSlice";
 import { RootState } from "@/redux/store";
-import axios from "axios";
 import { handleError } from "@/utils/handleError";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -28,8 +27,10 @@ import {
 import { toast } from "sonner";
 import { useSaveCodeMutation } from "@/redux/slices/api";
 
+
+
 export default function HelperHeader() {
-  const [saveLoading, setSaveLoading] = useState<boolean>(false);
+  //const [saveLoading, setSaveLoading] = useState<boolean>(false);
 
   const [shareBtn, setShareBtn] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -42,12 +43,9 @@ export default function HelperHeader() {
 
   const { urlId } = useParams();
   useEffect(() => {
-    if (urlId) {
-      setShareBtn(true);
-    } else {
-      setShareBtn(false);
-    }
-  });
+    setShareBtn(!!urlId);
+  }, [urlId]);
+  
   const handleSaveCode = async () => {
     // setSaveLoading(true);
     try {
@@ -91,7 +89,7 @@ export default function HelperHeader() {
 
         {shareBtn && (
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger asChild>
               <Button
                 className="flex justify-center items-center gap-1"
                 variant="secondary"
@@ -163,3 +161,4 @@ export default function HelperHeader() {
     </div>
   );
 }
+        

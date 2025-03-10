@@ -3,6 +3,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { useLoginMutation } from "@/redux/slices/api";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,18 +14,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { handleError } from "@/utils/handleError";
+import { updateCurrentUser, updateIsLoggedIn } from "@/redux/slices/appSlice";
+import { useDispatch } from "react-redux";
 
 const formSchema = z.object({
-  userId: z.string().min(2, {
+  userId: z.string().min(3, {
     message: "Invalid username or email.",
   }),
-  password: z.string().min(8, {
+  password: z.string().min(4, {
     message: "Invalid password.",
   }),
 });
 
 export default function Login() {
+
+  const [login,{isLoading}] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,10 +46,20 @@ export default function Login() {
   });
 
   // 2. Define a submit handler.
-  function handleLogin(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function handleLogin(values: z.infer<typeof formSchema>) {
+   
+    try{
+      console.log(values);
+      const response = await login(values).unwrap();
+      dispatch(updateCurrentUser(response));
+      dispatch(updateIsLoggedIn(true));
+      navigate("/");
+      console.log(response);
+    }
+    catch(error) {
+    //  console.log("Error");
+      handleError(error);
+    }
   }
 
   return (
@@ -61,7 +83,8 @@ export default function Login() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Username or Email" {...field} />
+                    <Input required placeholder="Username or Email" {...field}
+                     disabled={isLoading} />
                   </FormControl>
 
                   <FormMessage />
@@ -75,7 +98,8 @@ export default function Login() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="password" {...field} />
+                    <Input  required placeholder="password" {...field}
+                     disabled={isLoading} />
                   </FormControl>
 
                   <FormMessage />
@@ -83,8 +107,10 @@ export default function Login() {
               )}
             />
             <Button
+              loading={isLoading}
               className="w-full bg-blue-400 hover:bg-blue-600 text-white"
               type="submit"
+             
             >
               Login
             </Button>
